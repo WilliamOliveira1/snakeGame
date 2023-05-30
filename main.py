@@ -2,30 +2,13 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from random import randint
+from settings import *
 
 pygame.init()
-
-white_color = (255, 255, 255)
-black_color = (0, 0, 0)
-green_color = (0, 255, 0)
-red_color = (255, 0, 0)
-
-# screen size init
-width = 640
-height = 480
 screen = pygame.display.set_mode((width, height))
-
-#snake init position
-x_snake = int(width/2)
-y_snake = int(height/2)
-
-#apple init position
-x_apple = randint(50, 590)
-y_apple = randint(50, 430)
 
 # Define screen name
 pygame.display.set_caption('Snake game')
-clock = pygame.time.Clock()
 
 #Setting background music
 background_music = pygame.mixer.music.load('BoxCat Games - Battle (Boss).mp3')
@@ -37,16 +20,6 @@ collision = pygame.mixer.Sound("smw_coin.wav")
 
 #Set font to the game
 font = pygame.font.SysFont('arial', 20, True, True)
-
-points = 0
-velocity = 3
-x_control = velocity
-y_control = 0
-isDead = False
-
-#increase snake size
-snake_list = []
-initial_lenght = 5
 
 def reset_game():
     global points, initial_lenght, x_snake, y_snake, snake_list, head_list, x_apple, y_apple, isDead

@@ -32,10 +32,10 @@ background_music = pygame.mixer.music.load('BoxCat Games - Battle (Boss).mp3')
 pygame.mixer.music.play(-1)
 pygame.mixer.music.set_volume(0.5)
 
-#colocando musica colisão
+#collision with apple sound
 collision = pygame.mixer.Sound("smw_coin.wav")
 
-#Definir fonte para texto
+#Set font to the game
 font = pygame.font.SysFont('arial', 20, True, True)
 
 points = 0
@@ -107,8 +107,11 @@ def check_auto_collision():
     if snake_list.count(head_list) > 1:
         secondFont = pygame.font.SysFont('arial', 20, True, True)
         gameOverMessage = f'Game Over! Pressione a tecla R para jogar novamente'
+        gameOverPointsMessage = f'Total de pontos: {points}'
         gameOverFormattedText = secondFont.render(gameOverMessage, True, white_color)
+        gameOverPointsFormattedText = secondFont.render(gameOverPointsMessage, True, white_color)
         rect_Text = gameOverFormattedText.get_rect()
+        rect_Points_Text = gameOverPointsFormattedText.get_rect()
         isDead = True
         while isDead:
             screen.fill(black_color)
@@ -119,14 +122,15 @@ def check_auto_collision():
                 if event.type == KEYDOWN:
                     if event.key == K_r:
                         reset_game()
-            rect_Text.center =  (width//2, height//2)
+            rect_Text.center = (width//2, height//2)
+            rect_Points_Text.center = (width // 2, (height// 2)+20)
             screen.blit(gameOverFormattedText, rect_Text)
+            screen.blit(gameOverPointsFormattedText, rect_Points_Text)
             pygame.display.update()
 
 while True:
     clock.tick(30)
     screen.fill(black_color)
-    #concatenar string com variavel usa exemplo abaixo
     message = f'Pontos: {points}'
     formatted_text = font.render(message, False, white_color)
     for event in pygame.event.get():
